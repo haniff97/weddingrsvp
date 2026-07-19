@@ -78,20 +78,22 @@
             <span class="detail-icon">📍</span>
             <div>
               <p class="detail-label">Venue</p>
-              <p class="detail-value">Lot 60B, Lorong Batu, Jin Bawai,<br/>Kampung Sungai Udang, 41150<br/>Klang, Selangor</p>
+              <p class="detail-value">
+                INARA GERBANG HALL<br/>
+                LOT 6589, LORONG BAKTI, JIN BAWAL, KAMPUNG SUNGAI UDANG,<br/>
+                41250 KLANG, SELANGOR
+              </p>
             </div>
           </div>
         </div>
 
-        <a
-          href="https://maps.google.com/?q=Kampung+Sungai+Udang+Klang+Selangor"
-          target="_blank"
-          rel="noopener"
+        <button
           class="btn btn-primary location-btn"
           id="see-location-btn"
+          @click="showLocationModal = true"
         >
           📍 See Location
-        </a>
+        </button>
       </div>
     </section>
 
@@ -221,6 +223,32 @@
       </div>
     </section>
 
+    <!-- Location Modal -->
+    <div v-if="showLocationModal" class="modal-overlay" @click="showLocationModal = false">
+      <div class="modal-content" @click.stop>
+        <button class="modal-close" @click="showLocationModal = false">&times;</button>
+        <h3 class="modal-title">Choose Map App</h3>
+        <div class="map-options">
+          <a
+            href="https://maps.google.com/?q=INARA+GERBANG+HALL+LOT+6589+LORONG+BAKTI+JIN+BAWAL+KAMPUNG+SUNGAI+UDANG+41250+KLANG+SELANGOR"
+            target="_blank"
+            rel="noopener"
+            class="btn btn-primary map-btn google-map-btn"
+          >
+            Google Maps
+          </a>
+          <a
+            href="https://waze.com/ul?q=INARA+GERBANG+HALL"
+            target="_blank"
+            rel="noopener"
+            class="btn btn-primary map-btn waze-btn"
+          >
+            Waze
+          </a>
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -233,6 +261,7 @@ import { store } from '../store.js'
 
 const mainRef = ref(null)
 const copied = ref(false)
+const showLocationModal = ref(false)
 
 const schedule = [
   { time: '11:00 AM', desc: 'Wedding Ceremony' },
@@ -1037,5 +1066,74 @@ onUnmounted(() => {
     width: 160px;
     height: 196px;
   }
+}
+/* ===== MODAL ===== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modal-content {
+  background: var(--white);
+  padding: 30px;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  position: relative;
+  box-shadow: var(--shadow-lg);
+}
+
+.modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 1.8rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  line-height: 1;
+}
+
+.modal-title {
+  font-family: var(--font-serif);
+  color: var(--crimson);
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+}
+
+.map-options {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.map-btn {
+  display: block;
+  text-decoration: none;
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.google-map-btn {
+  background-color: #4285F4;
+  color: white;
+}
+
+.waze-btn {
+  background-color: #33ccff;
+  color: white;
 }
 </style>
