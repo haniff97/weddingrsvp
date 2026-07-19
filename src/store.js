@@ -14,13 +14,13 @@ export const store = reactive({
     }
   },
 
-  async addMessage(name, text, attending, guests) {
+  async addMessage(name, text, attending, guests, phone) {
     try {
       this.loading = true
       const res = await fetch('/api/rsvp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, attending, guests, message: text }),
+        body: JSON.stringify({ name, attending, guests, phone, message: text }),
       })
 
       if (!res.ok) throw new Error('Failed to save RSVP')

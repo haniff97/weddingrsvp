@@ -3,71 +3,107 @@
     <div v-if="!submitted">
       <form @submit.prevent="handleSubmit" id="rsvp-form">
         <div class="form-group">
-          <label for="rsvp-name" class="form-label">Name</label>
+          <label for="rsvp-name" class="form-label">Nama</label>
           <input
             id="rsvp-name"
             v-model="form.name"
             type="text"
             class="form-input"
-            placeholder="Your full name"
+            placeholder="Nama penuh anda"
             required
           />
         </div>
 
         <div class="form-group">
-          <label class="form-label">Attendance</label>
+          <label class="form-label">Kehadiran</label>
           <div class="radio-group">
             <label class="radio-label" for="attending-yes">
               <input type="radio" id="attending-yes" v-model="form.attending" value="yes" />
               <span class="radio-custom"></span>
-              Yes, I'll be there! 🎉
+              Ya, saya akan hadir! 🎉
             </label>
             <label class="radio-label" for="attending-no">
               <input type="radio" id="attending-no" v-model="form.attending" value="no" />
               <span class="radio-custom"></span>
-              Sorry, can't make it 😢
+              Maaf, tidak dapat hadir 😢
             </label>
           </div>
         </div>
 
         <div class="form-group" v-if="form.attending === 'yes'">
-          <label for="rsvp-guests" class="form-label">Number of Guests</label>
+          <label for="rsvp-phone" class="form-label">Nombor Telefon</label>
+          <input
+            id="rsvp-phone"
+            v-model="form.phone"
+            type="tel"
+            class="form-input"
+            placeholder="Nombor telefon anda"
+            required
+          />
+        </div>
+
+        <div class="form-group" v-if="form.attending === 'yes'">
+          <label for="rsvp-guests" class="form-label">Jumlah Kehadiran</label>
           <select id="rsvp-guests" v-model="form.guests" class="form-input">
-            <option value="1">1 person</option>
-            <option value="2">2 people</option>
-            <option value="3">3 people</option>
-            <option value="4">4 people</option>
-            <option value="5+">5+ people</option>
+            <option value="1">1 orang</option>
+            <option value="2">2 orang</option>
+            <option value="3">3 orang</option>
+            <option value="4">4 orang</option>
+            <option value="5+">5+ orang</option>
           </select>
         </div>
 
         <div class="form-group">
-          <label for="rsvp-message" class="form-label">Message (optional)</label>
+          <label for="rsvp-message" class="form-label">Ucapan (Pilihan)</label>
           <textarea
             id="rsvp-message"
             v-model="form.message"
             class="form-input form-textarea"
-            placeholder="Send your warm wishes..."
+            placeholder="Titipkan ucapan buat pengantin..."
             rows="3"
           ></textarea>
         </div>
 
-        <button type="submit" class="btn btn-primary submit-btn" id="rsvp-submit-btn">
-          Send RSVP 💌
-        </button>
+        <div class="submit-actions">
+          <button type="submit" class="btn btn-primary submit-btn" @click="submitType = 'rsvp'">
+            Hantar RSVP 💌
+          </button>
+          <button type="submit" class="btn btn-outline wa-btn mt-3" @click="submitType = 'wa'">
+            <span>💬</span> Terus ke WhatsApp
+          </button>
+        </div>
       </form>
     </div>
 
     <!-- Submitted state -->
     <div v-else class="submitted-state">
       <div class="success-icon">💑</div>
-      <h3 class="success-title">Thank you!</h3>
+      <h3 class="success-title">Terima kasih!</h3>
       <p class="success-msg">
         {{ form.attending === 'yes'
-          ? `We can't wait to celebrate with you, ${form.name}! 🎉`
-          : `We'll miss you, ${form.name}! Thank you for the wishes. 💕` }}
+          ? `Kami tidak sabar untuk meraikan hari bahagia ini bersama anda, ${form.name}! 🎉`
+          : `Ketidakhadiran anda amat dirasai, ${form.name}! Terima kasih atas ucapan anda. 💕` }}
       </p>
-      <button class="btn btn-outline reset-btn" @click="reset" id="rsvp-reset-btn">Submit another</button>
+      <div class="submitted-actions">
+        <button class="btn btn-outline reset-btn" @click="reset" id="rsvp-reset-btn">Hantar RSVP lain</button>
+      </div>
+    </div>
+
+    <!-- WhatsApp Modal -->
+    <div v-if="showWaModal" class="modal-overlay" @click="showWaModal = false">
+      <div class="modal-content" @click.stop>
+        <button class="modal-close" @click="showWaModal = false">&times;</button>
+        <h3 class="modal-title">Hubungi</h3>
+        <div class="contact-info">
+          <p class="contact-name">En. Hasnan</p>
+          <p class="contact-sub">(Ayah Pengantin)</p>
+        </div>
+        <div class="modal-actions">
+          <a :href="waLink" target="_blank" rel="noopener" class="btn btn-primary wa-btn" @click="showWaModal = false">
+            <span>💬</span> Terus ke WhatsApp
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -77,10 +113,14 @@ import { ref, reactive } from 'vue'
 import { store } from '../store.js'
 
 const submitted = ref(false)
+const waLink = ref('')
+const showWaModal = ref(false)
+const submitType = ref('rsvp')
 
 const form = reactive({
   name: '',
   attending: 'yes',
+  phone: '',
   guests: '1',
   message: '',
 })
@@ -88,30 +128,34 @@ const form = reactive({
 async function handleSubmit() {
   // Build WhatsApp message
   const attending = form.attending === 'yes'
-    ? `✅ Yes, attending with ${form.guests} person(s)`
-    : '❌ Unable to attend'
+    ? `✅ Ya, hadir berserta ${form.guests} orang`
+    : '❌ Tidak dapat hadir'
 
   const msg = [
-    `*Wedding RSVP — Haniff & Hanini (6.9.26)*`,
+    `*Pengesahan Kehadiran (RSVP) — Haniff & Hanini (6.9.26)*`,
     ``,
-    `👤 Name: ${form.name}`,
-    `📅 Attendance: ${attending}`,
-    form.message ? `💬 Message: ${form.message}` : null,
+    `👤 Nama: ${form.name}`,
+    form.attending === 'yes' ? `📱 No. Tel: ${form.phone}` : null,
+    `📅 Kehadiran: ${attending}`,
+    form.message ? `💬 Ucapan: ${form.message}` : null,
   ].filter(Boolean).join('\n')
-
-  const waNumber = '60173289264' // Replace with actual WhatsApp number
-  const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(msg)}`
-  window.open(waUrl, '_blank')
   
+  const waNumber = '60173289264' // Replace with actual WhatsApp number
+  waLink.value = `https://wa.me/${waNumber}?text=${encodeURIComponent(msg)}`
+
   // Save RSVP to server (Excel file)
-  await store.addMessage(form.name, form.message, form.attending, form.guests)
+  await store.addMessage(form.name, form.message, form.attending, form.guests, form.phone)
   
   submitted.value = true
+
+  if (submitType.value === 'wa') {
+    showWaModal.value = true
+  }
 }
 
 function reset() {
   submitted.value = false
-  Object.assign(form, { name: '', attending: 'yes', guests: '1', message: '' })
+  Object.assign(form, { name: '', attending: 'yes', phone: '', guests: '1', message: '' })
 }
 </script>
 
@@ -203,6 +247,12 @@ function reset() {
   box-shadow: inset 0 0 0 3px var(--white);
 }
 
+.submit-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
 .submit-btn {
   width: 100%;
   justify-content: center;
@@ -241,5 +291,89 @@ function reset() {
 .reset-btn {
   font-size: 0.9rem;
   padding: 10px 28px;
+}
+
+.submitted-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.wa-btn {
+  width: 100%;
+  justify-content: center;
+  border-radius: 10px;
+  font-size: 1rem;
+  padding: 12px;
+}
+
+/* ===== MODAL ===== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modal-content {
+  background: var(--white);
+  padding: 30px;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  position: relative;
+  box-shadow: var(--shadow-lg);
+}
+
+.modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 1.8rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  line-height: 1;
+}
+
+.modal-title {
+  font-family: var(--font-serif);
+  color: var(--crimson);
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+}
+
+.contact-info {
+  margin-bottom: 24px;
+}
+
+.contact-name {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 4px;
+}
+
+.contact-sub {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+.modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 </style>

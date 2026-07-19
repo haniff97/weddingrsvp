@@ -1,5 +1,6 @@
 <template>
   <div class="main-content" ref="mainRef">
+    <DotNavigation />
 
     <!-- ===== SECTION 1: SAVE THE DATE HERO ===== -->
     <section class="hero-section" id="save-the-date">
@@ -16,9 +17,9 @@
         <div class="verse-block reveal" data-delay="200">
           <p class="verse-arabic">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُمْ مِنْ أَنْفُسِكُمْ أَزْوَاجًا لِتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُمْ مَوَدَّةً وَرَحْمَةً</p>
           <p class="verse-text">
-            "And one of His signs is that He created for you spouses from among yourselves so that you may find comfort in them. And He has placed between you compassion and mercy. Surely in this are signs for people who reflect."
+            "Dan di antara tanda-tanda kebesaran-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda bagi kaum yang berfikir."
           </p>
-          <p class="verse-ref">— Surah Al-Rum: 21</p>
+          <p class="verse-ref">— Surah Ar-Rum: 21</p>
         </div>
       </div>
     </section>
@@ -33,8 +34,8 @@
     <!-- ===== SECTION 3: BRIDE & GROOM ===== -->
     <section id="bride-groom" class="bride-groom-section">
       <div class="section reveal" data-delay="0" style="display: flex; flex-direction: column; align-items: center;">
-        <p class="invitation-text">Together with our family, we invite you<br/>to join us in our wedding vows.</p>
-        <img src="/brideandgroom.png" alt="Bride and Groom" class="bride-groom-image" />
+        <p class="invitation-text">Dengan penuh kesyukuran, kami menjemput anda<br/>untuk meraikan majlis perkahwinan kami.</p>
+        <img src="/brideandgroom.png" alt="Pengantin" class="bride-groom-image" />
         <img src="/name.png" alt="Haniff and Hanini" class="names-image" />
       </div>
     </section>
@@ -56,28 +57,28 @@
     <!-- ===== SECTION 6: WEDDING PARTY ===== -->
     <section id="wedding-party">
       <div class="section reveal" data-delay="0">
-        <h2 class="section-title text-center">Wedding Party</h2>
+        <h2 class="section-title text-center">Majlis Perkahwinan</h2>
         <div class="divider"></div>
 
         <div class="party-details card reveal" data-delay="100">
           <div class="detail-row">
             <span class="detail-icon">📅</span>
             <div>
-              <p class="detail-label">Date</p>
-              <p class="detail-value">Sunday, 6 September 2026</p>
+              <p class="detail-label">Tarikh</p>
+              <p class="detail-value">Ahad, 6 September 2026</p>
             </div>
           </div>
           <div class="detail-row">
             <span class="detail-icon">🕐</span>
             <div>
-              <p class="detail-label">Time</p>
-              <p class="detail-value">11:00 AM – 4:00 PM</p>
+              <p class="detail-label">Masa</p>
+              <p class="detail-value">11:00 Pagi – 4:00 Petang</p>
             </div>
           </div>
           <div class="detail-row">
             <span class="detail-icon">📍</span>
             <div>
-              <p class="detail-label">Venue</p>
+              <p class="detail-label">Lokasi</p>
               <p class="detail-value">
                 INARA GERBANG HALL<br/>
                 LOT 6589, LORONG BAKTI, JIN BAWAL, KAMPUNG SUNGAI UDANG,<br/>
@@ -92,7 +93,7 @@
           id="see-location-btn"
           @click="showLocationModal = true"
         >
-          📍 See Location
+          📍 Lihat Lokasi
         </button>
       </div>
     </section>
@@ -100,7 +101,7 @@
     <!-- ===== SECTION 7: SCHEDULE ===== -->
     <section id="schedule-section">
       <div class="section reveal" data-delay="0">
-        <h2 class="section-title text-center">Schedule</h2>
+        <h2 class="section-title text-center">Atur Cara</h2>
         <div class="divider"></div>
 
         <div class="schedule-timeline">
@@ -116,9 +117,9 @@
     <!-- ===== SECTION 8: RESERVATION / RSVP ===== -->
     <section id="reservation-section">
       <div class="section reveal" data-delay="0">
-        <h2 class="section-title text-center">Reservation</h2>
+        <h2 class="section-title text-center">Pengesahan Kehadiran (RSVP)</h2>
         <div class="divider"></div>
-        <p class="section-intro">Let us know you're coming — RSVP by 30 August 2026</p>
+        <p class="section-intro">Sila sahkan kehadiran anda sebelum 30 Ogos 2026</p>
         <RsvpForm />
       </div>
     </section>
@@ -127,13 +128,13 @@
     <section id="guest-messages-section">
       <div class="section reveal" data-delay="100">
         <div class="guest-messages-card">
-          <h2 class="marker-title guest-msg-title">Guest Messages</h2>
+          <h2 class="marker-title guest-msg-title">Ucapan Tetamu</h2>
           
           <div class="messages-list" v-if="store.guestMessages.length > 0">
             <div class="guest-message-card" v-for="msg in store.guestMessages" :key="msg.id">
               <div class="msg-header">
                 <span class="msg-name">{{ msg.name }}</span>
-                <span class="msg-status" v-if="msg.attending">✓ Attending</span>
+                <span class="msg-status" v-if="msg.attending">✓ Hadir</span>
               </div>
               <div class="msg-date">{{ msg.date }}</div>
               <p class="msg-text">{{ msg.text }}</p>
@@ -141,7 +142,7 @@
           </div>
           
           <div class="empty-messages text-center" v-else>
-            <p>Your warm wishes will appear here.</p>
+            <p>Ucapan tulus ikhlas anda akan dipaparkan di sini.</p>
           </div>
         </div>
       </div>
@@ -150,15 +151,15 @@
     <!-- ===== SECTION 9: WEDDING GIFT ===== -->
     <section id="gift-section">
       <div class="section reveal" data-delay="0">
-        <h2 class="section-title text-center">Wedding Gift</h2>
+        <h2 class="section-title text-center">Hadiah Perkahwinan</h2>
         <div class="divider"></div>
 
         <div class="gift-intro reveal" data-delay="100">
           <p class="gift-text">
-            Your presence is the most meaningful gift of all. If you'd like to give something extra, we kindly prefer cash gifts to help us begin our next chapter together.
+            Kehadiran anda amat bermakna buat kami. Jika anda berhasrat memberikan hadiah, sumbangan wang tunai amat dihargai untuk membantu kami memulakan kehidupan baharu.
           </p>
           <p class="gift-text" style="margin-top: 10px;">
-            If you wish to make a contribution, we've created a Honeymoon Fund to create unforgettable moments on our first adventure as a married couple. Thank you! 💕
+            Sumbangan ikhlas anda amat kami hargai. Terima kasih! 💕
           </p>
         </div>
 
@@ -169,19 +170,20 @@
           </div>
           <div class="bank-details">
             <div class="bank-row">
-              <span class="bank-label">Account No.</span>
+              <span class="bank-label">No. Akaun</span>
               <span class="bank-value" id="bank-account-no">4942779523</span>
-              <button class="copy-btn" @click="copyAccount" id="copy-account-btn" :title="copied ? 'Copied!' : 'Copy'">
+              <button class="copy-btn" @click="copyAccount" id="copy-account-btn" :title="copied ? 'Disalin!' : 'Salin'">
                 {{ copied ? '✓' : '⎘' }}
               </button>
             </div>
             <div class="bank-row">
-              <span class="bank-label">Account Name</span>
+              <span class="bank-label">Nama Akaun</span>
               <span class="bank-value">Marisya Hanini</span>
             </div>
           </div>
         </div>
 
+        <!-- WhatsApp Number button (disabled for now)
         <a
           href="https://wa.me/60123456789"
           target="_blank"
@@ -191,6 +193,7 @@
         >
           <span>💬</span> WhatsApp Number
         </a>
+        -->
       </div>
     </section>
 
@@ -202,10 +205,10 @@
           <div class="countdown-overlay">
             <CountdownTimer class="timer-component" />
             <div class="countdown-labels">
-              <span>DAYS</span>
-              <span>HOURS</span>
-              <span>MINUTES</span>
-              <span>SECONDS</span>
+              <span>HARI</span>
+              <span>JAM</span>
+              <span>MINIT</span>
+              <span>SAAT</span>
             </div>
           </div>
         </div>
@@ -219,7 +222,7 @@
         </div>
 
         <!-- Bottom tagline -->
-        <p class="closing-tagline">With love &amp; gratitude</p>
+        <p class="closing-tagline">Dengan ikhlas dan penuh kesyukuran,</p>
       </div>
     </section>
 
@@ -227,10 +230,10 @@
     <div v-if="showLocationModal" class="modal-overlay" @click="showLocationModal = false">
       <div class="modal-content" @click.stop>
         <button class="modal-close" @click="showLocationModal = false">&times;</button>
-        <h3 class="modal-title">Choose Map App</h3>
+        <h3 class="modal-title">Pilih Aplikasi Peta</h3>
         <div class="map-options">
           <a
-            href="https://maps.google.com/?q=INARA+GERBANG+HALL+LOT+6589+LORONG+BAKTI+JIN+BAWAL+KAMPUNG+SUNGAI+UDANG+41250+KLANG+SELANGOR"
+            href="https://www.google.com/maps/search/?api=1&query=INARA+GERBANG+HALL+LOT+6589+LORONG+BAKTI+JIN+BAWAL+KAMPUNG+SUNGAI+UDANG+41250+KLANG+SELANGOR"
             target="_blank"
             rel="noopener"
             class="btn btn-primary map-btn google-map-btn"
@@ -257,6 +260,7 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import MusicPlayer from './MusicPlayer.vue'
 import RsvpForm from './RsvpForm.vue'
 import CountdownTimer from './CountdownTimer.vue'
+import DotNavigation from './DotNavigation.vue'
 import { store } from '../store.js'
 
 const mainRef = ref(null)
@@ -264,9 +268,9 @@ const copied = ref(false)
 const showLocationModal = ref(false)
 
 const schedule = [
-  { time: '11:00 AM', desc: 'Wedding Ceremony' },
-  { time: '12:30 PM', desc: 'Bride & Groom Entrance' },
-  { time: '04:00 PM', desc: 'End of Ceremony' },
+  { time: '11:00 AM', desc: 'Majlis Bermula' },
+  { time: '12:30 PM', desc: 'Ketibaan Pengantin' },
+  { time: '04:00 PM', desc: 'Majlis Bersurai' },
 ]
 
 const photoStrip = [

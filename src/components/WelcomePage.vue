@@ -1,11 +1,11 @@
 <template>
   <div class="welcome-page">
     <!-- The PNG image replacing the previous code -->
-    <img src="/welcome.png" alt="Welcome to our Wedding" class="welcome-image" />
+    <img src="/welcome.png" alt="Selamat Datang ke Majlis Perkahwinan Kami" class="welcome-image" />
     
     <!-- CTA Button -->
     <button class="open-btn" @click="$emit('open')" id="open-invitation-btn">
-      Open Invitation
+      Buka Jemputan
     </button>
   </div>
 </template>
