@@ -37,9 +37,9 @@ defineEmits(['open'])
 
 /* Open button */
 .open-btn {
-  padding: 14px 40px;
-  font-size: 1.4rem;
-  border-radius: 12px;
+  padding: 10px 30px;
+  font-size: 1.2rem;
+  border-radius: 10px;
   letter-spacing: 0.08em;
   font-family: var(--font-marker, sans-serif);
   background-color: #8b1a1a;

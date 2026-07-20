@@ -448,7 +448,7 @@ onUnmounted(() => {
 .verse-text {
   font-family: var(--font-serif);
   font-style: italic;
-  font-size: 1.4rem;
+  font-size: 0.9rem;
   color: var(--text-muted);
   line-height: 1.7;
   margin-bottom: 8px;
