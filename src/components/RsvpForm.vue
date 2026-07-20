@@ -90,21 +90,23 @@
     </div>
 
     <!-- WhatsApp Modal -->
-    <div v-if="showWaModal" class="modal-overlay" @click="showWaModal = false">
-      <div class="modal-content" @click.stop>
-        <button class="modal-close" @click="showWaModal = false">&times;</button>
-        <h3 class="modal-title">Contact</h3>
-        <div class="contact-info">
-          <p class="contact-name">En. Hasnan</p>
-          <p class="contact-sub">(Father of the Bride)</p>
-        </div>
-        <div class="modal-actions">
-          <a :href="waLink" target="_blank" rel="noopener" class="btn btn-primary wa-btn" @click="showWaModal = false">
-            <span>💬</span> Continue to WhatsApp
-          </a>
+    <Teleport to="body">
+      <div v-if="showWaModal" class="modal-overlay" @click="showWaModal = false">
+        <div class="modal-content" @click.stop>
+          <button class="modal-close" @click="showWaModal = false">&times;</button>
+          <h3 class="modal-title">Contact</h3>
+          <div class="contact-info">
+            <p class="contact-name">Mr. Hasnan</p>
+            <p class="contact-sub">(Father of the Bride)</p>
+          </div>
+          <div class="modal-actions">
+            <a :href="waLink" target="_blank" rel="noopener" class="btn btn-primary wa-btn" @click="showWaModal = false">
+              <span>💬</span> Continue to WhatsApp
+            </a>
+          </div>
         </div>
       </div>
-    </div>
+    </Teleport>
   </div>
 </template>
 
