@@ -156,10 +156,13 @@
 
         <div class="gift-intro reveal" data-delay="100">
           <p class="gift-text">
-            Your presence is deeply appreciated. If you wish to give a gift, a cash contribution to help us start our new life together would be greatly appreciated.
+            Your presence on our special day is truly enough.
           </p>
           <p class="gift-text" style="margin-top: 10px;">
-            Your sincere contribution is highly appreciated. Thank you! 💕
+            For those who wish to give a gift, a contribution towards our new beginning would be warmly received.
+          </p>
+          <p class="gift-text" style="margin-top: 10px;">
+            Thank you for being part of our celebration 🤍
           </p>
         </div>
 
@@ -280,7 +283,7 @@ const photoStrip = [
 ]
 
 function copyAccount() {
-  navigator.clipboard.writeText('1234567890').then(() => {
+  navigator.clipboard.writeText('4942779523').then(() => {
     copied.value = true
     setTimeout(() => copied.value = false, 2000)
   })
