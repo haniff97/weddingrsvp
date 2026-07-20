@@ -463,8 +463,7 @@ onUnmounted(() => {
 
 /* ===== BRIDE & GROOM ===== */
 .invitation-text {
-  font-family: var(--font-marker, 'Marker Felt', sans-serif);
-  font-size: 1.1rem;
+  font-size: 1rem;
   text-align: center;
   color: #1a1918;
   margin-bottom: 24px;
@@ -892,7 +891,7 @@ onUnmounted(() => {
 
 .timeline-time {
   font-family: var(--font-hand);
-  font-size: 1.05rem;
+  font-size: 1.15rem;
   font-weight: 600;
   color: var(--crimson);
 }
@@ -911,7 +910,7 @@ onUnmounted(() => {
 
 .timeline-desc {
   font-family: var(--font-sans);
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: var(--text-dark);
   font-weight: 500;
 }
