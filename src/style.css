@@ -21,9 +21,9 @@
   --border-radius: 16px;
   --shadow: 0 4px 24px rgba(139, 26, 26, 0.12);
   --shadow-lg: 0 8px 40px rgba(139, 26, 26, 0.18);
-  --font-hand: 'Caveat', cursive;
-  --font-serif: 'Playfair Display', serif;
-  --font-sans: 'Inter', sans-serif;
+  --font-hand: 'Gaegu', cursive;
+  --font-serif: 'Gaegu', cursive;
+  --font-sans: 'Gaegu', cursive;
   --font-marker: 'Gaegu', cursive;
 }
 
