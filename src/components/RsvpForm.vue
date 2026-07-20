@@ -69,7 +69,7 @@
             Send RSVP 💌
           </button>
           <button type="submit" class="btn btn-outline wa-btn mt-3" @click="submitType = 'wa'">
-            <span>💬</span> Continue to WhatsApp
+            WhatsApp <span>💬</span>
           </button>
         </div>
       </form>
@@ -77,7 +77,7 @@
 
     <!-- Submitted state -->
     <div v-else class="submitted-state">
-      <div class="success-icon">💑</div>
+      <div class="success-icon">👩‍❤️‍👨</div>
       <h3 class="success-title">Thank you!</h3>
       <p class="success-msg">
         {{ form.attending === 'yes'
@@ -101,7 +101,7 @@
           </div>
           <div class="modal-actions">
             <a :href="waLink" target="_blank" rel="noopener" class="btn btn-primary wa-btn" @click="showWaModal = false">
-              <span>💬</span> Continue to WhatsApp
+              WhatsApp <span>💬</span>
             </a>
           </div>
         </div>
@@ -308,6 +308,7 @@ function reset() {
   border-radius: 10px;
   font-size: 1rem;
   padding: 12px;
+  white-space: nowrap;
 }
 
 /* ===== MODAL ===== */

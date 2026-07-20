@@ -448,7 +448,7 @@ onUnmounted(() => {
 .verse-text {
   font-family: var(--font-serif);
   font-style: italic;
-  font-size: 0.9rem;
+  font-size: 0.75rem;
   color: var(--text-muted);
   line-height: 1.7;
   margin-bottom: 8px;
@@ -464,7 +464,7 @@ onUnmounted(() => {
 /* ===== BRIDE & GROOM ===== */
 .invitation-text {
   font-family: var(--font-marker, 'Marker Felt', sans-serif);
-  font-size: 1.4rem;
+  font-size: 1.1rem;
   text-align: center;
   color: #1a1918;
   margin-bottom: 24px;
