@@ -17,12 +17,12 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 
 const sections = [
-  { id: 'save-the-date', name: 'Mula' },
-  { id: 'bride-groom', name: 'Pengantin' },
-  { id: 'wedding-party', name: 'Majlis' },
-  { id: 'schedule-section', name: 'Atur Cara' },
+  { id: 'save-the-date', name: 'Start' },
+  { id: 'bride-groom', name: 'Bride & Groom' },
+  { id: 'wedding-party', name: 'Reception' },
+  { id: 'schedule-section', name: 'Itinerary' },
   { id: 'reservation-section', name: 'RSVP' },
-  { id: 'gift-section', name: 'Hadiah' }
+  { id: 'gift-section', name: 'Gifts' }
 ]
 
 const activeSection = ref('save-the-date')

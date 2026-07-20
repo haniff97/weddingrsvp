@@ -1,11 +1,11 @@
 <template>
   <div class="welcome-page">
     <!-- The PNG image replacing the previous code -->
-    <img src="/welcome.png" alt="Selamat Datang ke Majlis Perkahwinan Kami" class="welcome-image" />
+    <img src="/welcome.png" alt="Welcome to Our Wedding" class="welcome-image" />
     
     <!-- CTA Button -->
     <button class="open-btn" @click="$emit('open')" id="open-invitation-btn">
-      Buka Jemputan
+      Open Invitation
     </button>
   </div>
 </template>
@@ -32,7 +32,7 @@ defineEmits(['open'])
   max-width: 480px;
   height: auto;
   object-fit: contain;
-  margin-bottom: 24px;
+  margin-bottom: -40px;
 }
 
 /* Open button */

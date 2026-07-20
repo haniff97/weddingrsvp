@@ -17,7 +17,7 @@
         <div class="verse-block reveal" data-delay="200">
           <p class="verse-arabic">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُمْ مِنْ أَنْفُسِكُمْ أَزْوَاجًا لِتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُمْ مَوَدَّةً وَرَحْمَةً</p>
           <p class="verse-text">
-            "Dan di antara tanda-tanda kebesaran-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda bagi kaum yang berfikir."
+            "And of His signs is that He created for you from yourselves mates that you may find tranquillity in them; and He placed between you affection and mercy. Indeed in that are signs for a people who give thought."
           </p>
           <p class="verse-ref">— Surah Ar-Rum: 21</p>
         </div>
@@ -34,8 +34,8 @@
     <!-- ===== SECTION 3: BRIDE & GROOM ===== -->
     <section id="bride-groom" class="bride-groom-section">
       <div class="section reveal" data-delay="0" style="display: flex; flex-direction: column; align-items: center;">
-        <p class="invitation-text">Dengan penuh kesyukuran, kami menjemput anda<br/>untuk meraikan majlis perkahwinan kami.</p>
-        <img src="/brideandgroom.png" alt="Pengantin" class="bride-groom-image" />
+        <p class="invitation-text">With joy and gratitude, we invite you<br/>to celebrate our wedding reception.</p>
+        <img src="/brideandgroom.png" alt="Bride & Groom" class="bride-groom-image" />
         <img src="/name.png" alt="Haniff and Hanini" class="names-image" />
       </div>
     </section>
@@ -57,28 +57,28 @@
     <!-- ===== SECTION 6: WEDDING PARTY ===== -->
     <section id="wedding-party">
       <div class="section reveal" data-delay="0">
-        <h2 class="section-title text-center">Majlis Perkahwinan</h2>
+        <h2 class="section-title text-center">Wedding Reception</h2>
         <div class="divider"></div>
 
         <div class="party-details card reveal" data-delay="100">
           <div class="detail-row">
             <span class="detail-icon">📅</span>
             <div>
-              <p class="detail-label">Tarikh</p>
-              <p class="detail-value">Ahad, 6 September 2026</p>
+              <p class="detail-label">Date</p>
+              <p class="detail-value">Sunday, September 6, 2026</p>
             </div>
           </div>
           <div class="detail-row">
             <span class="detail-icon">🕐</span>
             <div>
-              <p class="detail-label">Masa</p>
-              <p class="detail-value">11:00 Pagi – 4:00 Petang</p>
+              <p class="detail-label">Time</p>
+              <p class="detail-value">11:00 AM – 4:00 PM</p>
             </div>
           </div>
           <div class="detail-row">
             <span class="detail-icon">📍</span>
             <div>
-              <p class="detail-label">Lokasi</p>
+              <p class="detail-label">Location</p>
               <p class="detail-value">
                 INARA GERBANG HALL<br/>
                 LOT 6589, LORONG BAKTI, JIN BAWAL, KAMPUNG SUNGAI UDANG,<br/>
@@ -93,7 +93,7 @@
           id="see-location-btn"
           @click="showLocationModal = true"
         >
-          📍 Lihat Lokasi
+          📍 View Location
         </button>
       </div>
     </section>
@@ -101,7 +101,7 @@
     <!-- ===== SECTION 7: SCHEDULE ===== -->
     <section id="schedule-section">
       <div class="section reveal" data-delay="0">
-        <h2 class="section-title text-center">Atur Cara</h2>
+        <h2 class="section-title text-center">Itinerary</h2>
         <div class="divider"></div>
 
         <div class="schedule-timeline">
@@ -117,9 +117,9 @@
     <!-- ===== SECTION 8: RESERVATION / RSVP ===== -->
     <section id="reservation-section">
       <div class="section reveal" data-delay="0">
-        <h2 class="section-title text-center">Pengesahan Kehadiran (RSVP)</h2>
+        <h2 class="section-title text-center">Attendance Confirmation (RSVP)</h2>
         <div class="divider"></div>
-        <p class="section-intro">Sila sahkan kehadiran anda sebelum 30 Ogos 2026</p>
+        <p class="section-intro">Please confirm your attendance by August 30, 2026</p>
         <RsvpForm />
       </div>
     </section>
@@ -128,13 +128,13 @@
     <section id="guest-messages-section">
       <div class="section reveal" data-delay="100">
         <div class="guest-messages-card">
-          <h2 class="marker-title guest-msg-title">Ucapan Tetamu</h2>
+          <h2 class="marker-title guest-msg-title">Guest Messages</h2>
           
           <div class="messages-list" v-if="store.guestMessages.length > 0">
             <div class="guest-message-card" v-for="msg in store.guestMessages" :key="msg.id">
               <div class="msg-header">
                 <span class="msg-name">{{ msg.name }}</span>
-                <span class="msg-status" v-if="msg.attending">✓ Hadir</span>
+                <span class="msg-status" v-if="msg.attending">✓ Attending</span>
               </div>
               <div class="msg-date">{{ msg.date }}</div>
               <p class="msg-text">{{ msg.text }}</p>
@@ -142,7 +142,7 @@
           </div>
           
           <div class="empty-messages text-center" v-else>
-            <p>Ucapan tulus ikhlas anda akan dipaparkan di sini.</p>
+            <p>Your sincere wishes will be displayed here.</p>
           </div>
         </div>
       </div>
@@ -151,15 +151,15 @@
     <!-- ===== SECTION 9: WEDDING GIFT ===== -->
     <section id="gift-section">
       <div class="section reveal" data-delay="0">
-        <h2 class="section-title text-center">Hadiah Perkahwinan</h2>
+        <h2 class="section-title text-center">Wedding Gift</h2>
         <div class="divider"></div>
 
         <div class="gift-intro reveal" data-delay="100">
           <p class="gift-text">
-            Kehadiran anda amat bermakna buat kami. Jika anda berhasrat memberikan hadiah, sumbangan wang tunai amat dihargai untuk membantu kami memulakan kehidupan baharu.
+            Your presence is deeply appreciated. If you wish to give a gift, a cash contribution to help us start our new life together would be greatly appreciated.
           </p>
           <p class="gift-text" style="margin-top: 10px;">
-            Sumbangan ikhlas anda amat kami hargai. Terima kasih! 💕
+            Your sincere contribution is highly appreciated. Thank you! 💕
           </p>
         </div>
 
@@ -170,14 +170,14 @@
           </div>
           <div class="bank-details">
             <div class="bank-row">
-              <span class="bank-label">No. Akaun</span>
+              <span class="bank-label">Account No.</span>
               <span class="bank-value" id="bank-account-no">4942779523</span>
-              <button class="copy-btn" @click="copyAccount" id="copy-account-btn" :title="copied ? 'Disalin!' : 'Salin'">
+              <button class="copy-btn" @click="copyAccount" id="copy-account-btn" :title="copied ? 'Copied!' : 'Copy'">
                 {{ copied ? '✓' : '⎘' }}
               </button>
             </div>
             <div class="bank-row">
-              <span class="bank-label">Nama Akaun</span>
+              <span class="bank-label">Account Name</span>
               <span class="bank-value">Marisya Hanini</span>
             </div>
           </div>
@@ -205,10 +205,10 @@
           <div class="countdown-overlay">
             <CountdownTimer class="timer-component" />
             <div class="countdown-labels">
-              <span>HARI</span>
-              <span>JAM</span>
-              <span>MINIT</span>
-              <span>SAAT</span>
+              <span>DAYS</span>
+              <span>HOURS</span>
+              <span>MINS</span>
+              <span>SECS</span>
             </div>
           </div>
         </div>
@@ -222,7 +222,7 @@
         </div>
 
         <!-- Bottom tagline -->
-        <p class="closing-tagline">Dengan ikhlas dan penuh kesyukuran,</p>
+        <p class="closing-tagline">With sincere gratitude,</p>
       </div>
     </section>
 
@@ -230,7 +230,7 @@
     <div v-if="showLocationModal" class="modal-overlay" @click="showLocationModal = false">
       <div class="modal-content" @click.stop>
         <button class="modal-close" @click="showLocationModal = false">&times;</button>
-        <h3 class="modal-title">Pilih Aplikasi Peta</h3>
+        <h3 class="modal-title">Choose Map App</h3>
         <div class="map-options">
           <a
             href="https://www.google.com/maps/search/?api=1&query=INARA+GERBANG+HALL+LOT+6589+LORONG+BAKTI+JIN+BAWAL+KAMPUNG+SUNGAI+UDANG+41250+KLANG+SELANGOR"
@@ -268,9 +268,9 @@ const copied = ref(false)
 const showLocationModal = ref(false)
 
 const schedule = [
-  { time: '11:00 AM', desc: 'Majlis Bermula' },
-  { time: '12:30 PM', desc: 'Ketibaan Pengantin' },
-  { time: '04:00 PM', desc: 'Majlis Bersurai' },
+  { time: '11:00 AM', desc: 'Event Begins' },
+  { time: '12:30 PM', desc: 'Arrival of Bride & Groom' },
+  { time: '04:00 PM', desc: 'Event Ends' },
 ]
 
 const photoStrip = [
@@ -347,6 +347,16 @@ onUnmounted(() => {
 
 .date-accent-section .section {
   padding-top: 0;
+  padding-bottom: 0;
+}
+
+#calendar-section .section {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+#wedding-party .section {
+  padding-top: 10px;
 }
 
 #schedule-section .section {
@@ -588,7 +598,7 @@ onUnmounted(() => {
 /* ===== CALENDAR ===== */
 .date-image {
   width: 100%;
-  max-width: 400px;
+  max-width: 600px;
   height: auto;
   object-fit: contain;
 }

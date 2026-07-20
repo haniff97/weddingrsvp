@@ -3,73 +3,73 @@
     <div v-if="!submitted">
       <form @submit.prevent="handleSubmit" id="rsvp-form">
         <div class="form-group">
-          <label for="rsvp-name" class="form-label">Nama</label>
+          <label for="rsvp-name" class="form-label">Name</label>
           <input
             id="rsvp-name"
             v-model="form.name"
             type="text"
             class="form-input"
-            placeholder="Nama penuh anda"
+            placeholder="Your full name"
             required
           />
         </div>
 
         <div class="form-group">
-          <label class="form-label">Kehadiran</label>
+          <label class="form-label">Attendance</label>
           <div class="radio-group">
             <label class="radio-label" for="attending-yes">
               <input type="radio" id="attending-yes" v-model="form.attending" value="yes" />
               <span class="radio-custom"></span>
-              Ya, saya akan hadir! 🎉
+              Yes, I will attend! 🎉
             </label>
             <label class="radio-label" for="attending-no">
               <input type="radio" id="attending-no" v-model="form.attending" value="no" />
               <span class="radio-custom"></span>
-              Maaf, tidak dapat hadir 😢
+              Sorry, I can't attend 😢
             </label>
           </div>
         </div>
 
         <div class="form-group" v-if="form.attending === 'yes'">
-          <label for="rsvp-phone" class="form-label">Nombor Telefon</label>
+          <label for="rsvp-phone" class="form-label">Phone Number</label>
           <input
             id="rsvp-phone"
             v-model="form.phone"
             type="tel"
             class="form-input"
-            placeholder="Nombor telefon anda"
+            placeholder="Your phone number"
             required
           />
         </div>
 
         <div class="form-group" v-if="form.attending === 'yes'">
-          <label for="rsvp-guests" class="form-label">Jumlah Kehadiran</label>
+          <label for="rsvp-guests" class="form-label">Number of Guests</label>
           <select id="rsvp-guests" v-model="form.guests" class="form-input">
-            <option value="1">1 orang</option>
-            <option value="2">2 orang</option>
-            <option value="3">3 orang</option>
-            <option value="4">4 orang</option>
-            <option value="5+">5+ orang</option>
+            <option value="1">1 person</option>
+            <option value="2">2 persons</option>
+            <option value="3">3 persons</option>
+            <option value="4">4 persons</option>
+            <option value="5+">5+ persons</option>
           </select>
         </div>
 
         <div class="form-group">
-          <label for="rsvp-message" class="form-label">Ucapan (Pilihan)</label>
+          <label for="rsvp-message" class="form-label">Message (Optional)</label>
           <textarea
             id="rsvp-message"
             v-model="form.message"
             class="form-input form-textarea"
-            placeholder="Titipkan ucapan buat pengantin..."
+            placeholder="Leave a message for the bride and groom..."
             rows="3"
           ></textarea>
         </div>
 
         <div class="submit-actions">
           <button type="submit" class="btn btn-primary submit-btn" @click="submitType = 'rsvp'">
-            Hantar RSVP 💌
+            Send RSVP 💌
           </button>
           <button type="submit" class="btn btn-outline wa-btn mt-3" @click="submitType = 'wa'">
-            <span>💬</span> Terus ke WhatsApp
+            <span>💬</span> Continue to WhatsApp
           </button>
         </div>
       </form>
@@ -78,14 +78,14 @@
     <!-- Submitted state -->
     <div v-else class="submitted-state">
       <div class="success-icon">💑</div>
-      <h3 class="success-title">Terima kasih!</h3>
+      <h3 class="success-title">Thank you!</h3>
       <p class="success-msg">
         {{ form.attending === 'yes'
-          ? `Kami tidak sabar untuk meraikan hari bahagia ini bersama anda, ${form.name}! 🎉`
-          : `Ketidakhadiran anda amat dirasai, ${form.name}! Terima kasih atas ucapan anda. 💕` }}
+          ? `We can\'t wait to celebrate our special day with you, ${form.name}! 🎉`
+          : `Your presence will be missed, ${form.name}! Thank you for your wishes. 💕` }}
       </p>
       <div class="submitted-actions">
-        <button class="btn btn-outline reset-btn" @click="reset" id="rsvp-reset-btn">Hantar RSVP lain</button>
+        <button class="btn btn-outline reset-btn" @click="reset" id="rsvp-reset-btn">Send another RSVP</button>
       </div>
     </div>
 
@@ -93,14 +93,14 @@
     <div v-if="showWaModal" class="modal-overlay" @click="showWaModal = false">
       <div class="modal-content" @click.stop>
         <button class="modal-close" @click="showWaModal = false">&times;</button>
-        <h3 class="modal-title">Hubungi</h3>
+        <h3 class="modal-title">Contact</h3>
         <div class="contact-info">
           <p class="contact-name">En. Hasnan</p>
-          <p class="contact-sub">(Ayah Pengantin)</p>
+          <p class="contact-sub">(Father of the Bride)</p>
         </div>
         <div class="modal-actions">
           <a :href="waLink" target="_blank" rel="noopener" class="btn btn-primary wa-btn" @click="showWaModal = false">
-            <span>💬</span> Terus ke WhatsApp
+            <span>💬</span> Continue to WhatsApp
           </a>
         </div>
       </div>
@@ -128,16 +128,16 @@ const form = reactive({
 async function handleSubmit() {
   // Build WhatsApp message
   const attending = form.attending === 'yes'
-    ? `✅ Ya, hadir berserta ${form.guests} orang`
-    : '❌ Tidak dapat hadir'
+    ? `✅ Yes, attending with ${form.guests} person(s)`
+    : '❌ Cannot attend'
 
   const msg = [
-    `*Pengesahan Kehadiran (RSVP) — Haniff & Hanini (6.9.26)*`,
+    `*Attendance Confirmation (RSVP) — Haniff & Hanini (6.9.26)*`,
     ``,
-    `👤 Nama: ${form.name}`,
-    form.attending === 'yes' ? `📱 No. Tel: ${form.phone}` : null,
-    `📅 Kehadiran: ${attending}`,
-    form.message ? `💬 Ucapan: ${form.message}` : null,
+    `👤 Name: ${form.name}`,
+    form.attending === 'yes' ? `📱 Tel No: ${form.phone}` : null,
+    `📅 Attendance: ${attending}`,
+    form.message ? `💬 Message: ${form.message}` : null,
   ].filter(Boolean).join('\n')
   
   const waNumber = '60173289264' // Replace with actual WhatsApp number

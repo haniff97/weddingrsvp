@@ -2,7 +2,7 @@
   <div class="music-player-wrapper">
     <div class="music-player-card">
       <div class="player-image">
-        <img src="/us.png" alt="Gambar Kami" />
+        <img src="/us.png" alt="Our Picture" />
       </div>
       
       <div class="player-content">
@@ -22,7 +22,7 @@
         </div>
 
         <div class="player-controls">
-          <button class="ctrl-btn loop-btn" title="Ulang">
+          <button class="ctrl-btn loop-btn" title="Repeat">
             <!-- Repeat icon -->
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="17 1 21 5 17 9"></polyline>
@@ -32,7 +32,7 @@
             </svg>
           </button>
 
-          <button class="ctrl-btn" @click="skip(-15)" title="Undur 15s" id="music-back-btn">
+          <button class="ctrl-btn" @click="skip(-15)" title="Rewind 15s" id="music-back-btn">
             <!-- Skip back -->
             <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
               <path d="M19 20L9 12l10-8v16zM5 19h2V5H5v14z"/>
@@ -49,14 +49,14 @@
             </svg>
           </button>
           
-          <button class="ctrl-btn" @click="skip(15)" title="Maju 15s" id="music-forward-btn">
+          <button class="ctrl-btn" @click="skip(15)" title="Forward 15s" id="music-forward-btn">
             <!-- Skip forward -->
             <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
               <path d="M5 4l10 8-10 8V4zm14 1v14h-2V5h2z"/>
             </svg>
           </button>
 
-          <button class="ctrl-btn shuffle-btn" title="Rawak">
+          <button class="ctrl-btn shuffle-btn" title="Shuffle">
             <!-- Shuffle icon -->
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="16 3 21 3 21 8"></polyline>
@@ -70,7 +70,7 @@
       </div>
     </div>
     
-    <p class="player-hint">Klik butang main untuk mendengar lagu kami..</p>
+    <p class="player-hint">Click the play button to listen to our song..</p>
     
     <!-- Hidden YouTube iframe -->
     <div style="position: absolute; width: 0; height: 0; overflow: hidden; opacity: 0; pointer-events: none;">
@@ -116,9 +116,9 @@ function initPlayer() {
   ytPlayer.value = new window.YT.Player('yt-player', {
     height: '1',
     width: '1',
-    videoId: 'sBiSqt8k3U4',
+    videoId: 'izVXgdiTcQ8',
     playerVars: {
-      start: 3,
+      start: 0,
       autoplay: 0,
       controls: 0,
       showinfo: 0,
