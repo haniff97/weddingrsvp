@@ -80,9 +80,9 @@
             <div>
               <p class="detail-label">Location</p>
               <p class="detail-value">
-                INARA GERBANG HALL<br/>
-                LOT 6589, LORONG BAKTI, JIN BAWAL, KAMPUNG SUNGAI UDANG,<br/>
-                41250 KLANG, SELANGOR
+                Inara Gerbang Hall<br/>
+                Lot 6589, Lorong Bakti, Jin Bawal, Kampung Sungai Udang,<br/>
+                41250 Klang, Selangor
               </p>
             </div>
           </div>
@@ -342,29 +342,32 @@ onUnmounted(() => {
 
 .bride-groom-section .section {
   padding-top: 10px;
-  padding-bottom: 0;
+  padding-bottom: 20px;
 }
 
 .date-accent-section .section {
-  padding-top: 0;
-  padding-bottom: 0;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 #calendar-section .section {
-  padding-top: 0;
-  padding-bottom: 0;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 #wedding-party .section {
-  padding-top: 10px;
+  padding-top: 30px;
+  padding-bottom: 20px;
 }
 
 #schedule-section .section {
+  padding-top: 30px;
   padding-bottom: 20px;
 }
 
 #reservation-section .section {
-  padding-bottom: 20px;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 #guest-messages-section .section {
@@ -445,7 +448,7 @@ onUnmounted(() => {
 .verse-text {
   font-family: var(--font-serif);
   font-style: italic;
-  font-size: 0.88rem;
+  font-size: 1.4rem;
   color: var(--text-muted);
   line-height: 1.7;
   margin-bottom: 8px;
@@ -461,7 +464,7 @@ onUnmounted(() => {
 /* ===== BRIDE & GROOM ===== */
 .invitation-text {
   font-family: var(--font-marker, 'Marker Felt', sans-serif);
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   text-align: center;
   color: #1a1918;
   margin-bottom: 24px;

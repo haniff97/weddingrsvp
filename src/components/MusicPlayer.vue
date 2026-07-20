@@ -336,7 +336,7 @@ function formatTime(sec) {
 /* Hint text */
 .player-hint {
   font-family: var(--font-marker, 'Marker Felt', sans-serif);
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   color: #1a1918;
   margin-top: 24px;
   letter-spacing: 0.03em;
@@ -345,7 +345,6 @@ function formatTime(sec) {
 
 @media (max-width: 480px) {
   .player-hint {
-    font-size: 1.25rem;
     margin-top: 16px;
   }
 }
