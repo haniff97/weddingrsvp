@@ -52,6 +52,7 @@ function getOrCreateSheet(workbook) {
       { header: 'Timestamp', key: 'timestamp', width: 22 },
       { header: 'Name', key: 'name', width: 25 },
       { header: 'Attending', key: 'attending', width: 12 },
+      { header: 'Phone', key: 'phone', width: 18 },
       { header: 'Guests', key: 'guests', width: 10 },
       { header: 'Message', key: 'message', width: 50 },
     ]
@@ -72,7 +73,7 @@ function getOrCreateSheet(workbook) {
 // POST /api/rsvp — Save a new RSVP entry
 app.post('/api/rsvp', async (req, res) => {
   try {
-    const { name, attending, guests, message } = req.body
+    const { name, attending, guests, phone, message } = req.body
 
     if (!name) {
       return res.status(400).json({ error: 'Name is required' })
@@ -97,6 +98,7 @@ app.post('/api/rsvp', async (req, res) => {
         timestamp,
         name || 'Anonymous',
         attending === 'yes' ? 'Yes' : 'No',
+        phone || '',
         guests || '1',
         message || '',
       ])
