@@ -81,7 +81,7 @@
               <p class="detail-label">Location</p>
               <p class="detail-value">
                 Inara Gerbang Hall<br/>
-                Lot 6589, Lorong Bakti, Jin Bawal, Kampung Sungai Udang,<br/>
+                Lot 6589, Lorong Bakti, Jln Bawal, Kampung Sungai Udang,<br/>
                 41250 Klang, Selangor
               </p>
             </div>
