@@ -35,8 +35,8 @@
     <section id="bride-groom" class="bride-groom-section">
       <div class="section reveal" data-delay="0" style="display: flex; flex-direction: column; align-items: center;">
         <p class="invitation-text">With joy and gratitude, we invite you<br/>to celebrate our wedding reception.</p>
-        <img src="/brideandgroom.png" alt="Bride & Groom" class="bride-groom-image" />
-        <img src="/name.png" alt="Haniff and Hanini" class="names-image" />
+        <img src="/brideandgroom.svg" alt="Bride & Groom" class="bride-groom-image" />
+        <img src="/name.svg" alt="Haniff and Hanini" class="names-image" />
       </div>
     </section>
 
@@ -182,6 +182,13 @@
             <div class="bank-row">
               <span class="bank-label">Account Name</span>
               <span class="bank-value">Marisya Hanini</span>
+              <button
+                class="qr-btn-inline"
+                id="show-qr-btn"
+                @click="showQrModal = true"
+              >
+                📱 QR
+              </button>
             </div>
           </div>
         </div>
@@ -225,7 +232,7 @@
         </div>
 
         <!-- Bottom tagline -->
-        <p class="closing-tagline">With sincere gratitude,</p>
+        <p class="closing-tagline">#HANINeedAHaniff</p>
       </div>
     </section>
 
@@ -255,6 +262,24 @@
       </div>
     </div>
 
+    <!-- QR Code Modal -->
+    <div v-if="showQrModal" class="modal-overlay" @click="showQrModal = false">
+      <div class="modal-content qr-modal" @click.stop>
+        <button class="modal-close" @click="showQrModal = false">&times;</button>
+        <h3 class="modal-title">Scan to Pay</h3>
+        <div class="qr-image-wrapper">
+          <img src="/qr.JPG" alt="Payment QR Code" class="qr-image" />
+        </div>
+        <a
+          href="/qr.JPG"
+          download="WeddingGift_QR.jpg"
+          class="btn btn-primary save-qr-btn"
+        >
+          💾 Save QR Code
+        </a>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -269,6 +294,7 @@ import { store } from '../store.js'
 const mainRef = ref(null)
 const copied = ref(false)
 const showLocationModal = ref(false)
+const showQrModal = ref(false)
 
 const schedule = [
   { time: '11:00 AM', desc: 'Event Begins' },
@@ -944,6 +970,8 @@ onUnmounted(() => {
   box-shadow: var(--shadow);
   margin: 20px 0;
   border: 2px solid rgba(139,26,26,0.1);
+  display: flex;
+  flex-direction: column;
 }
 
 .bank-logo {
@@ -1154,5 +1182,58 @@ onUnmounted(() => {
 .waze-btn {
   background-color: #33ccff;
   color: white;
+}
+
+/* ===== QR BUTTON & MODAL ===== */
+.qr-btn-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--crimson);
+  background: var(--crimson-pale);
+  border: none;
+  border-radius: 6px;
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.qr-btn-inline:hover {
+  background: var(--crimson);
+  color: var(--white);
+}
+
+.qr-modal {
+  max-width: 360px;
+}
+
+.qr-image-wrapper {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.qr-image {
+  width: 100%;
+  max-width: 280px;
+  height: auto;
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+.save-qr-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  border-radius: 12px;
+  padding: 10px 24px;
+  text-decoration: none;
 }
 </style>
