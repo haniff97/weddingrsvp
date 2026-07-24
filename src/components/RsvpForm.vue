@@ -42,16 +42,10 @@
           />
         </div>
 
-        <div class="form-group" v-if="form.attending === 'yes'">
-          <label for="rsvp-guests" class="form-label">Number of Guests</label>
-          <select id="rsvp-guests" v-model="form.guests" class="form-input">
-            <option value="1">1 person</option>
-            <option value="2">2 persons</option>
-            <option value="3">3 persons</option>
-            <option value="4">4 persons</option>
-            <option value="5+">5+ persons</option>
-          </select>
-        </div>
+        <!-- Guests field hidden from UI but kept in form data for Excel recording -->
+        <select id="rsvp-guests" v-model="form.guests" style="display:none;" aria-hidden="true" tabindex="-1">
+          <option value="1">1</option>
+        </select>
 
         <div class="form-group">
           <label for="rsvp-message" class="form-label">Message (Optional)</label>

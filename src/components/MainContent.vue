@@ -136,7 +136,6 @@
                 <span class="msg-name">{{ msg.name }}</span>
                 <span class="msg-status" v-if="msg.attending">✓ Attending</span>
               </div>
-              <div class="msg-date">{{ msg.date }}</div>
               <p class="msg-text">{{ msg.text }}</p>
             </div>
           </div>
@@ -825,6 +824,9 @@ onUnmounted(() => {
   font-size: 0.95rem;
   color: var(--text-dark);
   line-height: 1.4;
+  word-break: break-word;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }
 
 /* ===== GIFT ===== */

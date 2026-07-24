@@ -49,7 +49,6 @@ function getOrCreateSheet(workbook) {
     sheet = workbook.addWorksheet('RSVP')
     // Header row
     sheet.columns = [
-      { header: 'Timestamp', key: 'timestamp', width: 22 },
       { header: 'Name', key: 'name', width: 25 },
       { header: 'Attending', key: 'attending', width: 12 },
       { header: 'Phone', key: 'phone', width: 18 },
@@ -84,18 +83,9 @@ app.post('/api/rsvp', async (req, res) => {
       const workbook = await getWorkbook()
       const sheet = getOrCreateSheet(workbook)
 
-      const now = new Date()
-      const timestamp = now.toLocaleString('en-MY', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: '2-digit',
-        hour12: true,
-      })
+
 
       sheet.addRow([
-        timestamp,
         name || 'Anonymous',
         attending === 'yes' ? 'Yes' : 'No',
         phone || '',
@@ -133,15 +123,14 @@ app.get('/api/messages', async (req, res) => {
     sheet.eachRow((row, rowNumber) => {
       if (rowNumber === 1) return // Skip header
 
-      // Columns: 1=Timestamp, 2=Name, 3=Attending, 4=Guests, 5=Message
+      // Columns: 1=Name, 2=Attending, 3=Phone, 4=Guests, 5=Message
       const message = row.getCell(5).value
       if (!message || String(message).trim() === '') return // Skip entries without messages
 
       messages.push({
         id: rowNumber,
-        name: String(row.getCell(2).value || 'Anonymous'),
-        date: String(row.getCell(1).value || ''),
-        attending: String(row.getCell(3).value).toLowerCase() === 'yes',
+        name: String(row.getCell(1).value || 'Anonymous'),
+        attending: String(row.getCell(2).value).toLowerCase() === 'yes',
         text: String(message),
       })
     })
