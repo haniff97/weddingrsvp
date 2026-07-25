@@ -757,7 +757,7 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  max-height: 250px;
+  max-height: 380px;
   overflow-y: auto;
   padding-right: 6px;
 }
@@ -811,13 +811,6 @@ onUnmounted(() => {
   font-weight: 700;
 }
 
-.msg-date {
-  font-family: var(--font-sans);
-  font-size: 0.75rem;
-  color: #666;
-  margin-top: 2px;
-  margin-bottom: 8px;
-}
 
 .msg-text {
   font-family: var(--font-sans);

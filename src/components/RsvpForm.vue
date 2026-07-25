@@ -42,10 +42,21 @@
           />
         </div>
 
-        <!-- Guests field hidden from UI but kept in form data for Excel recording -->
-        <select id="rsvp-guests" v-model="form.guests" style="display:none;" aria-hidden="true" tabindex="-1">
-          <option value="1">1</option>
-        </select>
+        <div class="form-group" v-if="form.attending === 'yes'">
+          <label for="rsvp-guests" class="form-label">Number of Guests</label>
+          <select id="rsvp-guests" v-model="form.guests" class="form-input form-select">
+            <option value="1">1 Person</option>
+            <option value="2">2 People</option>
+            <option value="3">3 People</option>
+            <option value="4">4 People</option>
+            <option value="5">5 People</option>
+            <option value="6">6 People</option>
+            <option value="7">7 People</option>
+            <option value="8">8 People</option>
+            <option value="9">9 People</option>
+            <option value="10">10 People</option>
+          </select>
+        </div>
 
         <div class="form-group">
           <label for="rsvp-message" class="form-label">Message (Optional)</label>
@@ -53,8 +64,8 @@
             id="rsvp-message"
             v-model="form.message"
             class="form-input form-textarea"
-            placeholder="Leave a message for the bride and groom..."
-            rows="3"
+            placeholder="Write your heartfelt wishes, advice, or a sweet message for the bride and groom..."
+            rows="5"
           ></textarea>
         </div>
 
@@ -124,11 +135,11 @@ const form = reactive({
 async function handleSubmit() {
   // Build WhatsApp message
   const attending = form.attending === 'yes'
-    ? `✅ Yes, attending with ${form.guests} person(s)`
+    ? '✅ Yes, attending'
     : '❌ Cannot attend'
 
   const msg = [
-    `*Attendance Confirmation (RSVP) — Haniff & Hanini (6.9.26)*`,
+    `*Attendance Confirmation (RSVP) — Haniff & Hanini*`,
     ``,
     `👤 Name: ${form.name}`,
     form.attending === 'yes' ? `📱 Tel No: ${form.phone}` : null,
@@ -192,7 +203,12 @@ function reset() {
 
 .form-textarea {
   resize: vertical;
-  min-height: 80px;
+  min-height: 130px;
+}
+
+.form-select {
+  appearance: auto;
+  cursor: pointer;
 }
 
 /* Radio buttons */
