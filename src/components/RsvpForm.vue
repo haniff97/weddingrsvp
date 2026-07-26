@@ -70,11 +70,25 @@
         </div>
 
         <div class="submit-actions">
-          <button type="submit" class="btn btn-primary submit-btn" @click="submitType = 'rsvp'">
-            Send RSVP 💌
+          <button
+            type="submit"
+            class="btn btn-primary submit-btn"
+            :disabled="isSubmitting || store.loading || cooldownTimer > 0"
+            @click="submitType = 'rsvp'"
+          >
+            <span v-if="isSubmitting && submitType === 'rsvp'">Sending RSVP... ⏳</span>
+            <span v-else-if="cooldownTimer > 0">Please wait {{ cooldownTimer }}s... ⏳</span>
+            <span v-else>Send RSVP 💌</span>
           </button>
-          <button type="submit" class="btn btn-outline wa-btn mt-3" @click="submitType = 'wa'">
-            WhatsApp <span>💬</span>
+          <button
+            type="submit"
+            class="btn btn-outline wa-btn mt-3"
+            :disabled="isSubmitting || store.loading || cooldownTimer > 0"
+            @click="submitType = 'wa'"
+          >
+            <span v-if="isSubmitting && submitType === 'wa'">Opening WhatsApp... ⏳</span>
+            <span v-else-if="cooldownTimer > 0">Please wait {{ cooldownTimer }}s... ⏳</span>
+            <span v-else>WhatsApp <span>💬</span></span>
           </button>
         </div>
       </form>
@@ -116,13 +130,18 @@
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive, onBeforeUnmount } from 'vue'
 import { store } from '../store.js'
 
 const submitted = ref(false)
 const waLink = ref('')
 const showWaModal = ref(false)
 const submitType = ref('rsvp')
+
+const isSubmitting = ref(false)
+const cooldownTimer = ref(0)
+const lastSubmittedSignature = ref('')
+let cooldownInterval = null
 
 const form = reactive({
   name: '',
@@ -133,37 +152,70 @@ const form = reactive({
 })
 
 async function handleSubmit() {
-  // Build WhatsApp message
-  const attending = form.attending === 'yes'
-    ? '✅ Yes, attending'
-    : '❌ Cannot attend'
+  if (isSubmitting.value || store.loading || cooldownTimer.value > 0) return
 
-  const msg = [
-    `*Attendance Confirmation (RSVP) — Haniff & Hanini*`,
-    ``,
-    `👤 Name: ${form.name}`,
-    form.attending === 'yes' ? `📱 Tel No: ${form.phone}` : null,
-    `📅 Attendance: ${attending}`,
-    form.message ? `💬 Message: ${form.message}` : null,
-  ].filter(Boolean).join('\n')
-  
-  const waNumber = '60173289264' // Replace with actual WhatsApp number
-  waLink.value = `https://wa.me/${waNumber}?text=${encodeURIComponent(msg)}`
-
-  // Save RSVP to server (Excel file)
-  await store.addMessage(form.name, form.message, form.attending, form.guests, form.phone)
-  
-  submitted.value = true
-
-  if (submitType.value === 'wa') {
-    showWaModal.value = true
+  const currentSignature = `${form.name.trim().toLowerCase()}|${form.attending}|${form.phone.trim()}|${form.guests}|${form.message.trim().toLowerCase()}`
+  if (currentSignature === lastSubmittedSignature.value && lastSubmittedSignature.value !== '') {
+    alert('You have already submitted an RSVP with these exact details! Thank you 💕')
+    return
   }
+
+  try {
+    isSubmitting.value = true
+    lastSubmittedSignature.value = currentSignature
+
+    // Build WhatsApp message
+    const attending = form.attending === 'yes'
+      ? '✅ Yes, attending'
+      : '❌ Cannot attend'
+
+    const msg = [
+      `*Attendance Confirmation (RSVP) — Haniff & Hanini*`,
+      ``,
+      `👤 Name: ${form.name}`,
+      form.attending === 'yes' ? `📱 Tel No: ${form.phone}` : null,
+      `📅 Attendance: ${attending}`,
+      form.message ? `💬 Message: ${form.message}` : null,
+    ].filter(Boolean).join('\n')
+    
+    const waNumber = '60173289264' // Replace with actual WhatsApp number
+    waLink.value = `https://wa.me/${waNumber}?text=${encodeURIComponent(msg)}`
+
+    // Save RSVP to server (Excel file)
+    await store.addMessage(form.name, form.message, form.attending, form.guests, form.phone)
+    
+    submitted.value = true
+
+    if (submitType.value === 'wa') {
+      showWaModal.value = true
+    }
+
+    startCooldown(5)
+  } finally {
+    isSubmitting.value = false
+  }
+}
+
+function startCooldown(seconds) {
+  if (cooldownInterval) clearInterval(cooldownInterval)
+  cooldownTimer.value = seconds
+  cooldownInterval = setInterval(() => {
+    cooldownTimer.value--
+    if (cooldownTimer.value <= 0) {
+      clearInterval(cooldownInterval)
+      cooldownInterval = null
+    }
+  }, 1000)
 }
 
 function reset() {
   submitted.value = false
   Object.assign(form, { name: '', attending: 'yes', phone: '', guests: '1', message: '' })
 }
+
+onBeforeUnmount(() => {
+  if (cooldownInterval) clearInterval(cooldownInterval)
+})
 </script>
 
 <style scoped>

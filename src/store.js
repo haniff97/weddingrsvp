@@ -15,6 +15,7 @@ export const store = reactive({
   },
 
   async addMessage(name, text, attending, guests, phone) {
+    if (this.loading) return
     try {
       this.loading = true
       const res = await fetch('/api/rsvp', {
